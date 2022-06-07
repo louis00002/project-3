@@ -593,8 +593,257 @@ i encountered a series of errors when i tried to intall axios. the solution was 
             ]
            }
           }
-  
+       
+i then went to components directory 
+        
+         cd src/components
+       
+After that i opened my ListTodo.js and posted the following code.
+         
+         vi ListTodo.js
 
+.
+       
+         import React from 'react';
+
+         const ListTodo = ({ todos, deleteTodo }) 
+         => {
+
+         return (
+         <ul>
+         {
+         todos &&
+         todos.length > 0 ?
+         (
+         todos.map(todo => {
+         return (
+         <li key={todo._id} onClick={() => deleteTodo(todo._id)}>{todo.action}.          </li>
+         )
+         })
+         )
+         :
+         (
+         <li>No todo(s) left</li>
+         )
+         }
+         </ul>
+         )
+         }
+
+         export default ListTodo
+
+Then in your Todo.js file i wrote the following code
+       
+          import React, {Component} from 'react';
+          import axios from 'axios';
+
+          import Input from './Input';
+          import ListTodo from './ListTodo';
+
+          class Todo extends Component {
+
+          state = {
+          todos: []
+          }
+
+          componentDidMount(){
+          this.getTodos();
+          }
+
+          getTodos = () => {
+          axios.get('/api/todos')
+          .then(res => {
+          if(res.data){
+          this.setState({
+          todos: res.data
+          })
+          }
+          })
+          .catch(err => console.log(err))
+          }
+
+          deleteTodo = (id) => {
+
+              axios.delete(`/api/todos/${id}`)
+                .then(res => {
+                  if(res.data){
+                    this.getTodos()
+                  }
+                })
+                 .catch(err => console.log(err))
+
+          }
+
+          render() {
+          let { todos } = this.state;
+
+              return(
+                <div>
+                  <h1>My Todo(s)</h1>
+                  <Input getTodos={this.getTodos}/>
+                  <ListTodo todos={todos} deleteTodo={this.deleteTodo}/>
+                </div>
+              )
+
+            }
+            }
+
+            export default Todo;
+       
+We need to make little adjustment to our react code. Delete the logo and adjust our App.js to look like this.
+       
+Move to the src folder
+        
+           cd ..
+       
+ i Made sure that i am in the src folder and ran the following command
+       
+           vi App.js
+       
+ in the file, i wrote the following code
+       
+          import React from 'react';
+
+          import Todo from './components/Todo';
+          import './App.css';
+
+          const App = () => {
+          return (
+          <div className="App">
+          <Todo />
+          </div>
+          );
+          }
+
+          export default App;
+       
+In the src directory i opened the App.css and wrote the following code
+       
+          vi App.css
+
+.
+       
+           .App {
+           text-align: center;
+           font-size: calc(10px + 2vmin);
+           width: 60%;
+           margin-left: auto;
+           margin-right: auto;
+           }
+
+           input {
+           height: 40px;
+           width: 50%;
+           border: none;
+           border-bottom: 2px #101113 solid;
+           background: none;
+           font-size: 1.5rem;
+           color: #787a80;
+           }
+
+           input:focus {
+           outline: none;
+           }
+
+           button {
+           width: 25%;
+           height: 45px;
+           border: none;
+           margin-left: 10px;
+           font-size: 25px;
+           background: #101113;
+           border-radius: 5px;
+           color: #787a80;
+           cursor: pointer;
+           }
+
+           button:focus {
+           outline: none;
+           }
+
+          ul {
+          list-style: none;
+          text-align: left;
+          padding: 15px;
+          background: #171a1f;
+          border-radius: 5px;
+          }
+
+          li {
+          padding: 15px;
+          font-size: 1.5rem;
+          margin-bottom: 15px;
+          background: #282c34;
+          border-radius: 5px;
+          overflow-wrap: break-word;
+          cursor: pointer;
+          }
+
+          @media only screen and (min-width: 300px) {
+          .App {
+          width: 80%;
+          }
+
+          input {
+          width: 100%
+          }
+
+          button {
+          width: 100%;
+          margin-top: 15px;
+          margin-left: 0;
+          }
+          }
+
+          @media only screen and (min-width: 640px) {
+          .App {
+          width: 60%;
+          }
+
+          input {
+          width: 50%;
+          }
+
+          button {
+          width: 30%;
+          margin-left: 10px;
+          margin-top: 0;
+          }
+          }
+       
+In the src directory i opened the index.css and wrote the following code
+       
+          vim index.css
+       
+.
+       
+          body {
+          margin: 0;
+          padding: 0;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",           "Oxygen",
+          "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+          sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          box-sizing: border-box;
+          background-color: #282c34;
+          color: #787a80;
+          }
+
+          code {
+          font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+          monospace;
+          }
+
+i went back to the Todo directory using the following command
+       
+          cd ../..
+       
+ones i was in the Todo directory i ran the following command
+       
+          npm run dev
+       
+<img width="1074" alt="Screenshot 2022-06-07 at 17 57 52" src="https://user-images.githubusercontent.com/103360590/172439955-03599edf-ec1a-4a02-a396-464b43019342.png">
 
 
 

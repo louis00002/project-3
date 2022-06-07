@@ -554,45 +554,45 @@ i Install Axios
   
 i encountered a series of errors when i tried to intall axios. the solution was to edit the code in the  package.json file in the client directory. i replaced the coce with the following code
   
-  {
- "name": "client",
- "proxy": "http://localhost:5000",
- "version": "0.1.0",
- "private": true,
- "dependencies": {
-  "@testing-library/jest-dom": "^5.16.4",
-  "@testing-library/react": "^13.3.0",
-  "@testing-library/user-event": "^13.5.0",
-  "react": "^18.1.0",
-  "react-dom": "^18.1.0",
-  "react-scripts": "5.0.1",
-  "web-vitals": "^2.1.4"
- },
- "scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject"
- },
- "eslintConfig": {
-  "extends": [
-   "react-app",
-   "react-app/jest"
-  ]
- },
- "browserslist": {
-  "production": [
-   ">0.2%",
-   "not dead",
-   "not op_mini all"
-  ],
-  "development": [
-   "last 1 chrome version",
-   "last 1 firefox version",
-   "last 1 safari version"
-  ]
- }
-}
+          {
+           "name": "client",
+           "proxy": "http://localhost:5000",
+           "version": "0.1.0",
+           "private": true,
+           "dependencies": {
+           "@testing-library/jest-dom": "^5.16.4",
+           "@testing-library/react": "^13.3.0",
+           "@testing-library/user-event": "^13.5.0",
+           "react": "^18.1.0",
+           "react-dom": "^18.1.0",
+           "react-scripts": "5.0.1",
+           "web-vitals": "^2.1.4"
+           },
+           "scripts": {
+            "start": "react-scripts start",
+            "build": "react-scripts build",
+            "test": "react-scripts test",
+            "eject": "react-scripts eject"
+           },
+           "eslintConfig": {
+            "extends": [
+             "react-app",
+             "react-app/jest"
+            ]
+           },
+           "browserslist": {
+            "production": [
+             ">0.2%",
+             "not dead",
+            "not op_mini all"
+            ],
+            "development": [
+             "last 1 chrome version",
+            "last 1 firefox version",
+             "last 1 safari version"
+            ]
+           }
+          }
   
 
 
